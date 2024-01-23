@@ -1,5 +1,6 @@
   import {cart,addToCart} from '../data/cart.js';
   import {products} from '../data/products.js';
+  import {fromatCurrency} from './utils/money.js';
   
   //products from products.js.('it run's first because of products.js was in first)
   let productsHTML = ''; 
@@ -25,7 +26,7 @@
     </div>
 
     <div class="product-price">
-     &#8377 ${(product.priceCents / 2).toFixed(2)}
+     &#8377 ${fromatCurrency(product.priceCents / 2)}
     </div>
 
     <div class="product-quantity-container">
