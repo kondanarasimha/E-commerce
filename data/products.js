@@ -29,6 +29,21 @@ const products = [
     ]
   },
   {
+    id: "e43638ce-1d07eb678c6",
+    image: "images/products/blue-jacket.jpg",
+    name: "Men Blue Denim Jacket",
+    rating: {
+      stars: 4.5,
+      count: 9090
+    },
+    priceCents: 4546,
+    keywords: [
+      "menjacket",
+      "bluedenim",
+      "jacket"
+    ]
+  },
+  {
     id: "83d4ca15-0f35-48f5-b7a3-1ea210004f2e",
     image: "images/products/adults-plain-cotton-tshirt-2-pack-teal.jpg",
     name: "Adults Plain Cotton T-Shirt - 2 Pack",
@@ -656,5 +671,97 @@ const products = [
       "apparel",
       "mens"
     ]
-  }
+  },
+  {
+    id: "id1",
+    image: "images/products/6-piece-non-stick-baking-set.webp",
+    name: "6 pieces Non-stick panes",
+    rating: {
+      stars: 4.5,
+      count: 2000
+    }, 
+    priceCents: 2999,
+    keywords: [
+      "6piecepans",
+      "6setnonstick",
+      "nonstickpans"
+    ]
+  },
+  {
+    id: "id2",
+    image: "images/products/6-piece-white-dinner-plate-set.jpg",
+    name: "6 White Dinner Plates",
+    rating: {
+      stars: 4,
+      count: 2000
+    }, 
+    priceCents: 1000,
+    keywords: [
+      "6plates",
+      "dinnerplates",
+      "6plates"
+    ]
+  },
+  {
+    id: "id3",
+    image: "images/products/backpack.jpg",
+    name: "Black Bag",
+    rating: {
+      stars: 5,
+      count: 4777
+    }, 
+    priceCents: 4565,
+    keywords: [
+      "bag",
+      "blackbag",
+      "collegebag"
+    ]
+  },
+  {
+    id: "id4",
+    image: "images/products/coffeemaker-with-glass-carafe-black.jpg",
+    name: "CoffeMaker Black",
+    rating: {
+      stars: 4,
+      count: 3000
+    }, 
+    priceCents: 2435,
+    keywords: [
+      "coffemaker",
+      "teamaker",
+      "maker"
+    ]
+  },
+  {
+    id: "id5",
+    image: "images/products/blackout-curtains-black.jpg",
+    name: "Black Curtains",
+    rating: {
+      stars: 4,
+      count: 444
+    }, 
+    priceCents: 3457,
+    keywords: [
+      "curtains",
+      "blackcurtains",
+      "doorcurtains"
+    ]
+  },
+  {
+    id: "id6",
+    image: "images/products/blackout-curtain-set-beige.webp",
+    name: "Blackout Curtains",
+    rating: {
+      stars: 4,
+      count: 545
+    }, 
+    priceCents: 3497,
+    keywords: [
+      "curtains",
+      "whitecurtains",
+      "doorcurtains"
+    ]
+  },
+
+
 ];

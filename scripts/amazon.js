@@ -1,3 +1,5 @@
+  import {cart} from '../data/cart.js';
+  
   //products from products.js.('it run's first because of products.js was in first)
   let productsHTML = ''; 
 
@@ -42,7 +44,7 @@
 
     <div class="product-spacer"></div>
 
-    <div class="added-to-cart">
+    <div class="added-to-cart js-added-checkmark${product.id}">
       <img src="images/icons/checkmark.png">
       Added
     </div>
@@ -57,8 +59,9 @@
 
   document.querySelectorAll('.js-add-to-cart').forEach((button)=> {
     button.addEventListener('click',() => {
-      const productId = button.dataset.productId;
+      const {productId} = button.dataset; 
       //dataset method to get data from html data attribute
+      //productId: button.dataset.productId {Destructuring}
 
       let matchingItem;
 
@@ -75,8 +78,8 @@
         matchingItem.quantity += quantity;
       } else {
         cart.push({
-          productId: productId,
-          quantity: quantity
+          productId, //productId: productId {Destructuring}
+          quantity //productId: productId {Destructuring}
         })
       }
       let cartQuantity = 0;
@@ -85,6 +88,13 @@
         cartQuantity += item.quantity;
       })
       document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
+
+      const addedCheck = document.querySelector(`.js-added-checkmark${productId}`)
+      addedCheck.classList.add('added-to-cart-visible');
+
+      const intervalId = setTimeout(()=> {
+        addedCheck.classList.remove('added-to-cart-visible');
+      },2000)
     })
   })
   
