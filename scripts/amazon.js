@@ -1,4 +1,4 @@
-  import {cart} from '../data/cart.js';
+  import {cart,addToCart} from '../data/cart.js';
   import {products} from '../data/products.js';
   
   //products from products.js.('it run's first because of products.js was in first)
@@ -58,38 +58,28 @@
 
   document.querySelector('.js-products-grid').innerHTML = productsHTML; //targeting the div and add the genratingHTML 
 
+  //addTocart function moved into cart.js file because it related to cart file by using the modules we importing the addToCart function
+
+  function updateCartQuantity() {
+    let cartQuantity = 0;
+      cart.forEach((cartItem)=> {
+        cartQuantity += cartItem.quantity;
+      })
+      document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
+  }
+
   document.querySelectorAll('.js-add-to-cart').forEach((button)=> {
     button.addEventListener('click',() => {
       const {productId} = button.dataset; 
-      //dataset method to get data from html data attribute
-      //productId: button.dataset.productId {Destructuring}
-
-      let matchingItem;
-
-      cart.forEach((item)=> {
-        if(productId === item.productId) {
-          matchingItem = item
-        }
-      });
-
       const quantitySelector = document.querySelector(`.js-quantity-selector-${productId}`)
       const quantity = Number(quantitySelector.value)
+      addToCart(productId,quantity);
+      //dataset method to get data from html data attribute
+      //productId: button.dataset.productId {Destructuring}
+      updateCartQuantity();
 
-      if(matchingItem) {
-        matchingItem.quantity += quantity;
-      } else {
-        cart.push({
-          productId, //productId: productId {Destructuring}
-          quantity //productId: productId {Destructuring}
-        })
-      }
-      let cartQuantity = 0;
 
-      cart.forEach((item)=> {
-        cartQuantity += item.quantity;
-      })
-      document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
-
+      //This block for added check png
       const addedCheck = document.querySelector(`.js-added-checkmark${productId}`)
       addedCheck.classList.add('added-to-cart-visible');
 
