@@ -1,4 +1,5 @@
   import {cart} from '../data/cart.js';
+  import {products} from '../data/products.js';
   
   //products from products.js.('it run's first because of products.js was in first)
   let productsHTML = ''; 
