@@ -1,11 +1,12 @@
-import {cart} from "../../data/cart.js";
-import {getProduct, products} from "../../data/products.js";
-import {getDeliveryOption} from "../../data/deliveryOption.js";
-import {fromatCurrency} from "../utils/money.js";
+import { cart } from "../../data/cart.js";
+import { getProduct, products } from "../../data/products.js";
+import { getDeliveryOption } from "../../data/deliveryOption.js";
+import { fromatCurrency } from "../utils/money.js";
 
 export function renderPaymentSummary() {
   let productPriceCents = 0;
   let shippingPriceCents = 0;
+  let cartQuantity = 0;
 
   cart.forEach((cartItem)=> {
     const product = getProduct(cartItem.productId);
@@ -13,19 +14,19 @@ export function renderPaymentSummary() {
 
     const deliveryOption = getDeliveryOption(cartItem.deliveryOptionId);
     shippingPriceCents += deliveryOption.priceCents; 
+    cartQuantity += cartItem.quantity;
   })
   const totalBeforeTaxCents = productPriceCents + shippingPriceCents;
   const taxCents = totalBeforeTaxCents * 0.1;
   const totalCents = totalBeforeTaxCents + taxCents;
 
-  
   const paymentSummaryHTML = `
       <div class="payment-summary-title">
       Order Summary
     </div>
 
     <div class="payment-summary-row">
-      <div>Items (3):</div>
+      <div>Items (${cartQuantity}):</div>
       <div class="payment-summary-money">
         &#8377 ${fromatCurrency(productPriceCents)}
       </div>
@@ -46,7 +47,7 @@ export function renderPaymentSummary() {
     </div>
 
     <div class="payment-summary-row">
-      <div>Estimated tax (10%):</div>
+      <div>Gst tax(10%):</div>
       <div class="payment-summary-money">
         &#8377 ${fromatCurrency(taxCents)}
       </div>
