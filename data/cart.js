@@ -1,4 +1,9 @@
-  export let cart = JSON.parse(localStorage.getItem('cart'));
+  export let cart;
+
+  loadFromStorage();
+
+  export function loadFromStorage() {
+    cart = JSON.parse(localStorage.getItem('cart'));
 
   if(!cart) { //if cart is empty by using this defulate
     cart = [{
@@ -11,6 +16,7 @@
       quantity: 1,
       deliveryOptionId: '2'
     }];
+  }
   }
   
   
