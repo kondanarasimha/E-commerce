@@ -13,7 +13,14 @@ describe('test suite: formatCurrcey',()=> {
     expect(fromatCurrency(2000.5)).toEqual('20.01');
   });
 
-  
+  it('rounds down to the nearst cent',()=> {
+    expect(fromatCurrency(2000.4)).toEqual('20.00');
+  });
+
+  it('work with negative cents',()=> {
+    expect(fromatCurrency(-500)).toEqual('-5.00');
+  })
+
 });
 
 

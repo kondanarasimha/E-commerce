@@ -26,7 +26,7 @@
     </div>
 
     <div class="product-price">
-     &#8377 ${fromatCurrency(product.priceCents / 2)}
+     &#8377 ${fromatCurrency(product.priceCents)}
     </div>
 
     <div class="product-quantity-container">

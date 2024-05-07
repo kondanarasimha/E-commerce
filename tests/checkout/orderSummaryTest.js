@@ -6,7 +6,12 @@ import { renderPaymentSummary } from "../../scripts/checkout/paymentSummary.js";
 describe('test suit: renderOrderSummary', ()=> { 
   const productId1 = 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6';
   const productId2 = '15b6fc6f-327a-4ec4-896f-486349e85a3d';
-  beforeEach(()=> {
+
+  afterEach(()=> { //this hook run last of every test.
+    document.querySelector('.js-test-summary').innerHTML = '';
+  });
+
+  beforeEach(()=> { //this hook run starting of every test.
     spyOn(localStorage, 'setItem'); //after delete the some items form cart it save the remaing items.
 
     document.querySelector('.js-test-summary').innerHTML = `
@@ -41,7 +46,6 @@ describe('test suit: renderOrderSummary', ()=> {
     expect (
       document.querySelectorAll('.js-cart-item-container').length
     ).toEqual(2); //checking the products length in cart.
-
     expect(
       document.querySelector(`.js-product-quantity-${productId1}`).innerText
     ).toContain('Quantity: 2'); //checking the cart quantity of product 1
@@ -49,7 +53,13 @@ describe('test suit: renderOrderSummary', ()=> {
       document.querySelector(`.js-product-quantity-${productId2}`).innerText
     ).toContain('Quantity: 1'); //checking the cart quantity of product 2
 
-    document.querySelector('.js-test-summary').innerHTML = '';
+    expect(
+      document.querySelector(`.js-product-name-${productId1}`).innerText
+    ).toContain('Black and Gray Athletic Cotton Socks - 6 Pairs');
+    //afterEach() hook will run
+    expect(
+      document.querySelector(`.js-product-price-${productId1}`).innerText
+    ).toContain('₹ 10.90')
   });
 
 
@@ -59,22 +69,23 @@ describe('test suit: renderOrderSummary', ()=> {
     expect(
       document.querySelector(`.js-delete-link-${productId1}`).click()
     );
-
     expect(
       document.querySelectorAll('.js-cart-item-container').length
     ).toEqual(1);
-
     expect(
       document.querySelector(`.js-delete-link-${productId1}`)
     ).toEqual(null);
-
     expect(
       document.querySelector(`.js-delete-link-${productId2}`)
     ).not.toEqual(null);
-
     expect(cart.length).toEqual(1); 
     expect(cart[0].productId).toEqual(productId2);
-
-    document.querySelector('.js-test-summary').innerHTML = '';
+    expect(
+      document.querySelector(`.js-product-name-${productId2}`).innerText
+    ).toEqual('Intermediate Size Basketball');
+    expect(
+      document.querySelector(`.js-product-price-${productId2}`).innerText
+    ).toContain('₹ 20.95');
+    //afterEach() hook will run
     })
 })
