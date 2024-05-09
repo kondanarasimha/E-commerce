@@ -11,7 +11,7 @@ export function getProduct(productId) {
     return matchingProduct;
  }
 
- class product {
+ class Product {
   id;
   image;
   name;
@@ -34,9 +34,31 @@ export function getProduct(productId) {
     return fromatCurrency(this.priceCents);
   }
 
+  extraInfoHTML() {
+    return '';
+  }
+
  }
 
- export const products = [
+ class Clothing extends Product { //it is for sepecific for clothing products.
+  sizeChartLink
+
+  constructor(productDetails) {
+    super(productDetails); //super method is used to inheritances the constructor form the parent class.
+    this.sizeChartLink = productDetails.sizeChartLink;
+  }
+
+  extraInfoHTML() {
+    // super.extraInfoHTML() accessing the method from the parent class.
+    return `
+    <a href="${this.sizeChartLink}" target=_blank>Size chart
+    </a>
+    `;
+  }
+ }
+
+
+ export const products = [ //products is a object(intances of Product class).
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
     image: "images/products/athletic-cotton-socks-6-pairs.jpg",
@@ -79,7 +101,10 @@ export function getProduct(productId) {
       "menjacket",
       "bluedenim",
       "jacket"
-    ]
+    ],
+    type: "clothing",
+    sizeChartLink: "/images/clothing-size-chart.png"
+    
   },
   {
     id: "83d4ca15-0f35-48f5-b7a3-1ea210004f2e",
@@ -155,7 +180,9 @@ export function getProduct(productId) {
       "hoodies",
       "sweaters",
       "apparel"
-    ]
+    ],
+    type: "clothing",
+    sizeChartLink: "images/clothing-size-chart.png"
   },
   {
     id: "77919bbe-0e56-475b-adde-4f24dfed3a04",
@@ -281,7 +308,9 @@ export function getProduct(productId) {
       "shorts",
       "apparel",
       "mens"
-    ]
+    ],
+    type: "clothing",
+    sizeChartLink: "images/clothing-size-chart.png"
   },
   {
     id: "c2a82c5e-aff4-435f-9975-517cfaba2ece",
@@ -478,7 +507,9 @@ export function getProduct(productId) {
       "pants",
       "apparel",
       "mens"
-    ]
+    ],
+    type: "clothing",
+    sizeChartLink: "images/clothing-size-chart.png"
   },
   {
     id: "1c079479-8586-494f-ab53-219325432536",
@@ -557,7 +588,9 @@ export function getProduct(productId) {
       "jogging",
       "apparel",
       "womens"
-    ]
+    ],
+    type: "clothing",
+    sizeChartLink: "images/clothing-size-chart.png"
   },
   {
     id: "d339adf3-e004-4c20-a120-40e8874c66cb",
@@ -708,7 +741,9 @@ export function getProduct(productId) {
       "hoodies",
       "apparel",
       "mens"
-    ]
+    ],
+    type: "clothing",
+    sizeChartLink: "images/clothing-size-chart.png"
   },
   {
     id: "id1",
@@ -803,5 +838,8 @@ export function getProduct(productId) {
 
 
 ].map((productDetails)=> { //map will transforms the array.
-  return new product(productDetails); //it creating the object of every product and returing.
+  if(productDetails.type === 'clothing') { //checking for the specific product based on type(disclamer type).
+    return new Clothing(productDetails); // if type is clothing then it will creat a instances of Clothing class.
+  }
+  return new Product(productDetails); //it creating the instances of every product class.
 });
