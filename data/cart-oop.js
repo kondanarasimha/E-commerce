@@ -99,7 +99,6 @@
   const businessCart = Cart('cart-business'); //saving the Cart function return values into business Cart.
     
   cart.loadFromStorage();
-
   businessCart.loadFromStorage();
 
   console.log(cart);

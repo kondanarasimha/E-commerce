@@ -1,13 +1,13 @@
 class Cart { //genrating object using class.
-  cartItems; //in class we give it as a variable instaned of properties.
-  localStorageKey;
+  cartItems; //in class we give it as a variable instaned of property.
+  #localStorageKey; //"#" is a private property
 
   constructor(localStorageKey) { //constructor run the setup code.
-    this.localStorageKey = localStorageKey; //this will access to the object name.
-    this.loadFromStorage();
+    this.localStorageKey = localStorageKey; //"this" will access to the object that we genrated.
+    this.#loadFromStorage();
   }
 
-  loadFromStorage() { //method
+  #loadFromStorage() { //Private method
     this.cartItems = JSON.parse(localStorage.getItem(this.localStorageKey));
 
     if(!this.cartItems) { //if cart is empty by using this defulate
@@ -103,10 +103,9 @@ class Cart { //genrating object using class.
 const cart = new Cart('cart-oop'); //creating a instances (individual objects created based on the class) of class.
 const businessCart = new Cart('cart-business');
   
-
 console.log(cart);
 console.log(businessCart);
-
+  
 console.log(businessCart instanceof Cart); //checking the instances using class.
 
 
