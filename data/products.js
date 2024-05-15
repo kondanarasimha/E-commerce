@@ -11,7 +11,7 @@ export function getProduct(productId) {
     return matchingProduct;
  }
 
- class Product {
+ export class Product {
   id;
   image;
   name;
@@ -40,7 +40,7 @@ export function getProduct(productId) {
 
  }
 
- class Clothing extends Product { //it is for sepecific for clothing products.
+ export class Clothing extends Product { //it is for sepecific for clothing products.
   sizeChartLink
 
   constructor(productDetails) {
@@ -57,7 +57,7 @@ export function getProduct(productId) {
   }
  };
 
- class Appliances extends Product {
+ export class Appliances extends Product {
     instructions;
     warranty;
 
