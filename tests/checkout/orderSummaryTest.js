@@ -2,6 +2,7 @@ import { renderOrderSummary } from "../../scripts/checkout/orderSummary.js";
 import { cart, loadFromStorage } from "../../data/cart.js";
 import { renderCheckoutHeader } from "../../scripts/checkout/checkoutHeader.js";
 import { renderPaymentSummary } from "../../scripts/checkout/paymentSummary.js";
+import { loadProducts } from "../../data/products.js";
 
 describe('test suit: renderOrderSummary', ()=> { 
   const productId1 = 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6';
@@ -9,6 +10,12 @@ describe('test suit: renderOrderSummary', ()=> {
 
   afterEach(()=> { //this hook run last of every test.
     document.querySelector('.js-test-summary').innerHTML = '';
+  });
+
+  beforeAll((done)=> { //beforeAll hoke run all the function first.
+    loadProducts(()=> {
+      done(); //done is bulit in method of jasmin to wait for some time, by using this method to get the products from backend.
+    });
   });
 
   beforeEach(()=> { //this hook run starting of every test.
