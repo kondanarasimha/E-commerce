@@ -1,6 +1,6 @@
 import { fromatCurrency } from "../scripts/utils/money.js";
 
-export function getProduct(productId) {
+ export function getProduct(productId) {
   let matchingProduct;
 
     products.forEach((product)=> {
@@ -77,7 +77,35 @@ export function getProduct(productId) {
     }
  }
 
+ export let products = [];
 
+ export function loadProducts(fun) { //fun is parameter(callback function) to run the html grid on the page.
+  const xhr = new XMLHttpRequest();
+
+  xhr.addEventListener('load',()=> {
+    products = JSON.parse(xhr.response).map((productDetails)=> { //map will transforms the array.
+      if(productDetails.type === 'clothing') { //checking for the specific product based on type(disclamer type).
+        return new Clothing(productDetails); // if type is clothing then it will creat a instances of Clothing class.
+      }
+      if(productDetails.type === 'appliance') {
+        return new Appliances(productDetails);
+      }
+      return new Product(productDetails); //it creating the instances of every product class.
+    });
+
+    console.log('load products');
+    
+    fun();
+
+  });
+
+  xhr.open('GET', 'https://supersimplebackend.dev/products');
+  xhr.send();
+ };
+
+
+
+/*
  export const products = [ //products is a object(intances of Product class).
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -881,6 +909,7 @@ export function getProduct(productId) {
   }
   return new Product(productDetails); //it creating the instances of every product class.
 });
+*/
 
 
 //more about class 
