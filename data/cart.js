@@ -17,12 +17,12 @@
       deliveryOptionId: '2'
     }];
   }
-  }
+  };
   
   
   function saveLocalStorage() {
     localStorage.setItem('cart', JSON.stringify(cart));
-  }
+  };
 
   export function addToCart(productId,quantity) {
     let matchingItem;
@@ -43,7 +43,7 @@
         });
       }
       saveLocalStorage();
-  }
+  };
 
   export function removeFromCart(productId) {
     const newCart = []
@@ -55,7 +55,7 @@
     })
     cart = newCart
     saveLocalStorage();
-  }
+  };
 
   export function calculateCartQuantity() {
     let cartQuantity = 0;
@@ -63,7 +63,7 @@
       cartQuantity += cartItem.quantity
     })
     return cartQuantity
-  }
+  };
 
   export function updateQuantity(productId, newQuantity) {
     let matchingItem;
@@ -75,7 +75,7 @@
     })
     matchingItem.quantity = newQuantity
     saveLocalStorage();
-   }
+   };
 
   export function updateDeliveryOption(productId, deliveryOptionId) {
     let matchingItem;
@@ -89,4 +89,18 @@
       matchingItem.deliveryOptionId = deliveryOptionId;
 
       saveLocalStorage();
-   }
+   };
+
+   export function loadCart(fun) { //fun is parameter(callback function) to run the html grid on the page.
+    const xhr = new XMLHttpRequest();
+  
+    xhr.addEventListener('load',()=> {
+      console.log(xhr.response);
+        
+      fun();
+  
+    });
+  
+    xhr.open('GET', 'https://supersimplebackend.dev/cart');
+    xhr.send();
+   };
