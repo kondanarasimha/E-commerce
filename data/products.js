@@ -9,7 +9,7 @@ import { fromatCurrency } from "../scripts/utils/money.js";
       }
     });
     return matchingProduct;
- }
+ };
 
  export class Product {
   id;
@@ -38,7 +38,7 @@ import { fromatCurrency } from "../scripts/utils/money.js";
     return '';
   }
 
- }
+ };
 
  export class Clothing extends Product { //it is for sepecific for clothing products.
   sizeChartLink
@@ -75,9 +75,37 @@ import { fromatCurrency } from "../scripts/utils/money.js";
       </a>
       `
     }
- }
+ };
 
  export let products = [];
+
+ export function loadProductsFetch() {
+  const promise = fetch(
+    'https://supersimplebackend.dev/products'
+  ).then((response)=> {
+    return response.json();
+  }).then((productsData)=> {
+    products = productsData.map((productDetails)=> { //map will transforms the array.
+      if(productDetails.type === 'clothing') { //checking for the specific product based on type(disclamer type).
+        return new Clothing(productDetails); // if type is clothing then it will creat a instances of Clothing class.
+      }
+      if(productDetails.type === 'appliance') {
+        return new Appliances(productDetails);
+      }
+      return new Product(productDetails); //it creating the instances of every product class.
+    });
+
+    console.log('load products');    
+  });
+
+  return promise;
+ };
+
+/*
+ loadProductsFetch().then(()=>{
+  console.log('next step');
+ })
+*/
 
  export function loadProducts(fun) { //fun is parameter(callback function) to run the html grid on the page.
   const xhr = new XMLHttpRequest();
@@ -101,7 +129,7 @@ import { fromatCurrency } from "../scripts/utils/money.js";
 
   xhr.open('GET', 'https://supersimplebackend.dev/products');
   xhr.send();
- };
+ }; 
 
 
 
