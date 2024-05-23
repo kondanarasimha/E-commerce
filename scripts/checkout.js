@@ -7,7 +7,23 @@ import { loadCart } from "../data/cart.js";
 // import '../data/car.js';
 // import '../data/backend-practice.js';
 
+async function loadPage() {
+  await loadProductsFetch();
 
+  const value = await new Promise((resolve)=> {
+    loadCart(()=> {
+      resolve();
+    });
+  });
+
+  renderOrderSummary();
+  renderPaymentSummary();
+  renderCheckoutHeader();
+};
+loadPage();
+
+
+/*
 Promise.all([ //onces the all promise's completed, it's go to next step to then.
   loadProductsFetch(),
   new Promise((resolve)=> {
@@ -20,7 +36,8 @@ Promise.all([ //onces the all promise's completed, it's go to next step to then.
   renderOrderSummary();
   renderPaymentSummary();
   renderCheckoutHeader();
-})
+});
+*/
 
 /*
 promise without promise all method.
