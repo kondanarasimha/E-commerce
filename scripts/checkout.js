@@ -8,13 +8,24 @@ import { loadCart } from "../data/cart.js";
 // import '../data/backend-practice.js';
 
 async function loadPage() {
-  await loadProductsFetch();
+  try {
+    // throw 'error 1';
 
-  const value = await new Promise((resolve)=> {
-    loadCart(()=> {
-      resolve();
+    await loadProductsFetch();
+
+    const value = await new Promise((resolve,reject)=> {
+      // throw 'error 2' the throw immedetly trow a error. 
+      //reject makes the error in feature.
+      loadCart(()=> {
+        // reject('error 3');
+        resolve();
+      });
     });
-  });
+
+  } catch (error) {
+    console.log('unexpected error. please try again later.');
+  }
+
 
   renderOrderSummary();
   renderPaymentSummary();

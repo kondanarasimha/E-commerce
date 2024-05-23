@@ -96,10 +96,14 @@ import { fromatCurrency } from "../scripts/utils/money.js";
     });
 
     console.log('load products');    
-  });
+  }).catch((error)=> {
+    console.log('unexpected error. please try again later.');
+  }) 
 
   return promise;
+
  };
+
 
 /*
  loadProductsFetch().then(()=>{
@@ -127,10 +131,13 @@ import { fromatCurrency } from "../scripts/utils/money.js";
 
   });
 
+  xhr.addEventListener('error',(error)=>{
+    console.log('unexpected error. please try again later.');
+  })
+
   xhr.open('GET', 'https://supersimplebackend.dev/products');
   xhr.send();
  }; 
-
 
 
 /*
