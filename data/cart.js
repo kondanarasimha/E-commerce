@@ -91,11 +91,17 @@
       saveLocalStorage();
    };
 
+   export async function loadCartFetch() {
+    const respones = await fetch('https://supersimplebackend.dev/cart');
+    const responesText = await respones.text();
+    console.log(responesText);
+   };
+
    export function loadCart(fun) { //fun is parameter(callback function) to run the html grid on the page.
     const xhr = new XMLHttpRequest();
   
     xhr.addEventListener('load',()=> {
-      console.log(xhr.response);
+      // console.log(xhr.response);
         
       fun();
   

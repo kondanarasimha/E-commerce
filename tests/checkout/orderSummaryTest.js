@@ -12,10 +12,18 @@ describe('test suit: renderOrderSummary', ()=> {
     document.querySelector('.js-test-summary').innerHTML = '';
   });
 
+  /*
   beforeAll((done)=> { //beforeAll hoke run all the function first.
     loadProductsFetch().then(()=> {
       done(); //done is bulit in method of jasmin to wait for some time, by using this method to get the products from backend.
     });
+  });
+  */
+
+
+  //This is using the async and await instande of done function(above commented code).
+  beforeAll(async ()=> {
+    await loadProductsFetch();
   });
 
   beforeEach(()=> { //this hook run starting of every test.
