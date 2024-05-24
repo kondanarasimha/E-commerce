@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercises-backend</title>
+</head>
+<body>
+
+
+  <script>
+    /*
+    //Api call using xml method.
+    const xhr = new XMLHttpRequest(); //creating a instances of class(XMLHttpRequest);
+    xhr.open('GET', 'https://supersimplebackend.dev/greeting');
+    xhr.send();
+
+    xhr.addEventListener('load',()=> {
+      console.log(xhr.response);
+    })
+    */
+
+    /*
+    //Api call using fetch method.
+    async function greeting() {
+      const respones = await fetch('https://supersimplebackend.dev/greeting');
+      const message = await respones.text();
+      console.log(message);
+    };
+    greeting();
+    */
+
+    /*
+    //Posting a name into backend
+    async function postGreeting() {
+
+      const respones = await fetch('https://supersimplebackend.dev/greeting', {
+        method: 'POST',
+
+        headers: {
+          'Content-type': 'application/json',
+        },
+
+        body: JSON.stringify({
+          name:'Konda Narasimha'
+        })
+      });
+
+      console.log(await respones.text());
+    }
+    postGreeting();
+    */
+
+    /*
+    //Testing amzone backend Api calling.
+    async function getAmazon() {
+      try {
+        const respones = await fetch('https://amazon.com');
+        const text = respones.text()
+        console.log(text);
+      } catch(error) {
+        console.log('CORS error. Your request was blocked by the backend.');
+      }
+    };
+
+    getAmazon();
+
+    //outPut is geting a error known as CORS(cross-origin resources sharing), this means the our request waas blocked by amazon server.
+    */ 
+
+    /*
+    async function greetingError() {
+      try {
+        const respones = await fetch('https://supersimplebackend.dev/greeting',{
+          method: 'POST',
+
+          headers: {
+            'Content-type':'application/json'
+          }        
+        });
+
+    } catch(error) {
+
+        if(respones.status >= 400) {
+          throw respones
+        }
+
+        if(error.status === 400) {
+          const errorMessage = await error.json();
+            console.log(errorMessage);
+        } else {
+          console.log('Network error. Please try again');
+        }
+      }
+    };
+    
+    greetingError();
+    */
+
+  </script>
+</body>
+</html>
