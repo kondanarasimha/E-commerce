@@ -2,6 +2,8 @@ import { getProduct, loadProductsFetch } from "../data/products.js";
 import { orders } from "../data/orders.js";
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import { fromatCurrency } from "./utils/money.js";
+import { addToCart } from "../data/cart.js";
+import { calculateCartQuantity } from "../data/cart.js";
 
 async function loadPage() {
   await loadProductsFetch();
@@ -42,7 +44,7 @@ function productListHTML(order) {
   let productListHTML = '';
 
   order.products.forEach((orderDetails)=> {
-    const product = getProduct(orderDetails.productId)
+    const product = getProduct(orderDetails.productId);
 
     productListHTML += `
       <div class="product-image-container">
@@ -59,26 +61,38 @@ function productListHTML(order) {
         <div class="product-quantity">
           Quantity: ${orderDetails.quantity}
         </div>
-        <button class="buy-again-button button-primary">
+        <button class="buy-again-button button-primary js-buy-again" data-product-id="${product.id}">
           <img class="buy-again-icon" src="images/icons/buy-again.png">
           <span class="buy-again-message">Buy it again</span>
         </button>
       </div>
 
       <div class="product-actions">
-        <a href="tracking.html">
-          <button class="track-package-button button-secondary">
+        <a href="tracking.html?orderId=${orderDetails.productId}&productId=${product.id}">
+          <button class="track-package-button button-secondary js-track-package">
             Track package
           </button>
         </a>
       </div>
     `;
   });
-
+  
   return productListHTML;
 }
 
 document.querySelector('.js-orders-grid').innerHTML = ordersHTML;
+
+document.querySelectorAll('.js-buy-again').forEach((button)=> {
+
+  button.addEventListener('click',()=> {
+    const {productId} = button.dataset;
+    addToCart(productId,1);
+  });
+
+});
+
+document.querySelector('.js-cart-quantity')
+  .innerHTML = calculateCartQuantity();
 
 };
 
