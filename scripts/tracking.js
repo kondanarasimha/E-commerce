@@ -21,6 +21,11 @@ async function loadPage() {
     }
   });
 
+  const todayDate = dayjs();
+  const orderDate = dayjs(order.orderTime);
+  const deliveryDate = dayjs(productDetails.estimatedDeliveryTime);
+  const progressPercent = ((todayDate - orderDate) / (deliveryDate - orderDate)) * 100;
+
   const trackingHTML =`
     <div class="order-tracking">
     <a class="back-to-orders-link link-primary" href="orders.html">
@@ -43,24 +48,31 @@ async function loadPage() {
     <img class="product-image" src="${product.image}">
 
     <div class="progress-labels-container">
-    <div class="progress-label">
+    <div class="progress-label ${
+      progressPercent < 50 ? 'current-status' : ''
+    }">
       Preparing
     </div>
-    <div class="progress-label current-status">
+    <div class="progress-label ${
+      progressPercent >= 50 ? 'current-status' : ''
+    }">
       Shipped
     </div>
-    <div class="progress-label">
+    <div class="progress-label ${
+      progressPercent >= 100 ? 'current-status' : ''
+    }">
       Delivered
     </div>
   </div>
 
   <div class="progress-bar-container">
-    <div class="progress-bar"></div>
+    <div class="progress-bar" style="width: ${progressPercent}%"></div>
   </div> 
   </div>
   `;
 
   document.querySelector('.js-order-tracking').innerHTML = trackingHTML;
+  document.querySelector('.js-cart-quantity').innerHTML = calculateCartQuantity();
 
 }
 
