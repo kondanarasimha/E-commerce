@@ -75,6 +75,8 @@ function productListHTML(order) {
         </a>
       </div>
     `;
+  document.querySelector('.js-cart-quantity')
+  .innerHTML = calculateCartQuantity();
   });
   
   return productListHTML;
@@ -87,12 +89,11 @@ document.querySelectorAll('.js-buy-again').forEach((button)=> {
   button.addEventListener('click',()=> {
     const {productId} = button.dataset;
     addToCart(productId,1);
+    document.querySelector('.js-cart-quantity')
+    .innerHTML = calculateCartQuantity();
   });
 
 });
-
-document.querySelector('.js-cart-quantity')
-  .innerHTML = calculateCartQuantity();
 
 };
 
