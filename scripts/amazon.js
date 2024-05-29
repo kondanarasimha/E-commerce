@@ -8,10 +8,30 @@
   
   function renderProductsGrid() {
 
+    const url = new URL(window.location.href);
+    const searchValue = url.searchParams.get('search');
+
+    let filterProducts = products;
+
+    if(searchValue) {
+      filterProducts = products.filter((product)=> {
+        let matchingProduct = false; 
+
+        product.keyWords.forEach((keyWords)=> { //This callback checks for the keyword match.
+          if((keyWords.toLowerCase()).includes(searchValue.toLowerCase())) {
+            matchingProduct = true; //If the keyword match variable mark's as a true, then the product store into the filterProducts variable to render on the home page.
+          }
+        });
+
+        return matchingProduct || (product.name.toLowerCase()).includes(searchValue.toLowerCase());
+        //In return statement if matchingProduct(check's with keywords) got flase then the other line check's for with name of the product.
+      });
+    }
+
     //products from products.js.('it run's first because of products.js was in first)
     let productsHTML = ''; 
 
-    products.forEach((product) => { //every single product  
+    filterProducts.forEach((product) => { //every single product  
       productsHTML += 
       `<div class="product-container">
       <div class="product-image-container">
@@ -96,6 +116,24 @@
       });
     });
 };
-  
+
+  document.querySelector('.js-search-button')
+    .addEventListener('click',()=> {
+      redirectToSearchResults();
+  });
+
+  document.querySelector('.js-search-bar')
+    .addEventListener('keydown',(event)=> {
+      if(event.key === 'Enter') {
+        redirectToSearchResults();
+      }
+  });
+
+  function redirectToSearchResults() {
+    const searchValue = document.querySelector('.js-search-bar').value;
+    window.location.href=`amazon.html?search=${searchValue}`;
+  }
+
+
 
 

@@ -7,6 +7,7 @@ import { fromatCurrency } from "../scripts/utils/money.js";
       if(product.id === productId) {
         matchingProduct = product;
       }
+      console.log(matchingProduct);
     });
     return matchingProduct;
  };
@@ -17,6 +18,7 @@ import { fromatCurrency } from "../scripts/utils/money.js";
   name;
   rating;
   priceCents;
+  keyWords;
 
   constructor(productDetails) {
     this.id = productDetails.id;
@@ -24,6 +26,8 @@ import { fromatCurrency } from "../scripts/utils/money.js";
     this.name = productDetails.name;
     this.rating = productDetails.rating;
     this.priceCents = productDetails.priceCents;
+    this.keyWords = productDetails.keywords;
+    
   }
 
   getStarsUrl() {
